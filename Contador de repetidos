@@ -4,88 +4,128 @@ import java.util.ArrayList;
 
 /**
  *
- * @author mikillo
+ * @author
  */
 public class Programacion_C2 {
 
     static ArrayList<Integer> lista = new ArrayList<Integer>();
+    static int cont = 0; // contador del valor del vector
+    static int posicion = 0;// valor de posicion del vector a comparar
+    static int aux1 = 0;// auxiliar acumulativo temporal
+    static int aux2 = 0;// auxiliar acumulativo temporal 
+    static int maximo = 0;// valor mas repetido
+    static int actual = 0;// valor comparativo con el vector
+    static int tamano = 0;// tamaño del vector 
+    static boolean find;// control de cambio de variable cont
+    static boolean change = true;// control de cambio de variable actual
+    static int n_cambios=0;
+    static int n_recorridos=1;
 
     /**
-     * (79,53 ,40 ,18 ,43 ,75 ,95 ,2 ,58 ,30 ,89 ,81 ,80 ,23 ,66 ,5 ,40 ,81 ,80
-     * ,18 ,26 ,81 ,81 ,85 ,93 ,61 ,80 ,50 ,26 ,85 ,8 ,30 ,29 ,56 ,55 ,18 ,25
-     * ,33 ,81 ,10 ,70 ,62 ,68 ,13 ,72 ,29 ,8 ,25 ,71 ,87 ,51 ,40 ,37 ,39 ,18
-     * ,85 ,39 ,74 ,26 ,1 ,3 ,92 ,21 ,40 ,55 ,92 ,60 ,8 ,82 ,50 ,44 ,95 ,49 ,86
-     * ,70 ,88 ,87 ,35 ,83 ,78 ,30 ,38 ,4 ,63 ,68 ,2 ,68 ,16 ,22 ,36 ,14 ,57 ,33
-     * ,40 ,87 ,43 ,20 ,29 ,65 ,27 ,92);
+     * 78,64,27,81,6,15,    65,2,70,47,77,78,   24,4,64,19,75,94,   72,15,73,24,99,1,    62,78,44,84,11,21,  59,71,46,21,59,46,
+     * 23,35,32,21,10,64,   87,25,25,72,51,75,  39,79,53,40,18,43,  75,95,2,58,30,89,    81,80,23,66,5,40,   81,80,18,26,81,81,
+     * 85,93,61,80,50,26,   85,8,30,29,56,55,   18,25,33,81,10,70,  62,68,13,72,29,8,    25,71,87,51,40,37,  39,18,85,39,74,26,
+     * 1,3,92,21,40,55,     92,60,8,82,50,44,   95,49,86,70,88,87,  35,83,78,30,38,4,    63,68,2,68,16,22,   36,14,57,33,40,87,
+     * 43,20,29,65,27,92);
      */
-    static int cont = 0;
-    static int posicion = 0;
-    static int aux1 = 0;
-    static int aux2 = 0;
-    static int maximo = 0;
-    static int actual = 0;
-    static int tamano = 0;
-
     public static void main(String args[]) {
-        lista.add(79);
-        lista.add(53);
-        lista.add(40);
-        lista.add(18);
-        lista.add(43);
-        lista.add(75);
-        lista.add(95);
-        lista.add(2);
-        lista.add(58);
-        lista.add(30);
-        lista.add(89);
-        lista.add(81);
-        lista.add(80);
-        lista.add(23);
-        lista.add(66);
-        lista.add(5);
-        lista.add(40);
-        lista.add(81);
-        lista.add(80);
-
+        lista.add(78); lista.add(64); lista.add(27); lista.add(81); lista.add(6); lista.add(15);
+        lista.add(65); lista.add(2);  lista.add(70); lista.add(47); lista.add(77);lista.add(78);
+        lista.add(24); lista.add(4);  lista.add(64); lista.add(19); lista.add(75);lista.add(94);
+        lista.add(72); lista.add(15); lista.add(73); lista.add(24); lista.add(99);lista.add(1);
+        lista.add(62); lista.add(78); lista.add(44); lista.add(84); lista.add(11);lista.add(21);
+        lista.add(59); lista.add(71); lista.add(46); lista.add(21); lista.add(59);lista.add(46);
+        lista.add(23); lista.add(35); lista.add(32); lista.add(21); lista.add(10);lista.add(64);
+        lista.add(87); lista.add(25); lista.add(25); lista.add(72); lista.add(51);lista.add(75);
+        lista.add(39); lista.add(79); lista.add(53); lista.add(40); lista.add(18);lista.add(43);
+        lista.add(75); lista.add(95); lista.add(2);  lista.add(58); lista.add(30);lista.add(89);
+        lista.add(81); lista.add(80); lista.add(23); lista.add(66); lista.add(5); lista.add(40);
+        lista.add(81); lista.add(80); lista.add(18); lista.add(26); lista.add(81);lista.add(81);
+        lista.add(85); lista.add(93); lista.add(61); lista.add(80); lista.add(50);lista.add(26);
+        lista.add(85); lista.add(8);  lista.add(30); lista.add(29); lista.add(56);lista.add(55);
+        lista.add(18); lista.add(25); lista.add(33); lista.add(81); lista.add(10);lista.add(70);
+        lista.add(62); lista.add(68); lista.add(13); lista.add(72); lista.add(29);lista.add(8);
+        lista.add(25); lista.add(71); lista.add(87); lista.add(51); lista.add(40);lista.add(37);
+        lista.add(39); lista.add(18); lista.add(85); lista.add(39); lista.add(74);lista.add(26);
+        lista.add(1);  lista.add(3);  lista.add(92); lista.add(21); lista.add(40);lista.add(55);
+        lista.add(92); lista.add(60); lista.add(8);  lista.add(82); lista.add(50);lista.add(44);
+        lista.add(95); lista.add(49); lista.add(86); lista.add(70); lista.add(88);lista.add(87);
+        lista.add(35); lista.add(83); lista.add(78); lista.add(30); lista.add(38);lista.add(4);
+        lista.add(63); lista.add(68); lista.add(2); lista.add(68); lista.add(16);lista.add(22);
+        lista.add(36); lista.add(14); lista.add(57); lista.add(33); lista.add(40);lista.add(87);
+        lista.add(43); lista.add(20); lista.add(29); lista.add(65); lista.add(27);lista.add(92);
+        
+        long time_start, time_end;
+        time_start = System.currentTimeMillis();
         recorrer();
+        time_end = System.currentTimeMillis();
+        System.out.println("Valor mas repetido final: " + maximo + "--- Tiempo transcurrido en milesimas: " + ((time_end - time_start)) + " ");
+        System.out.println("Numero de veces recorrido: "+n_recorridos);
+        System.out.println("Numero de veces cambiado: "+n_cambios);
     }
 
     public static void recorrer() {
 
         tamano = lista.size();
-        
-        if (cont < tamano -1) {
+        find = false;
 
-            if (cont == 0) {
-                actual = lista.get(posicion);               
+        if (cont < tamano) {
+
+            // validar el valor a evaluar dentro del vector
+            if (cont == 0 && change == true) {
+                actual = lista.get(cont);
+                change = false;
             }
 
-            System.out.println("Valor a evaluar " + actual + " contador:" + cont + " Valor a comparar = "+lista.get(cont+1)+" Tamaño del vector : " + tamano);
+//            System.out.println("Valor a evaluar " + actual + " contador:" + cont + " Valor a comparar = " + lista.get(cont)
+//                    + " Tamaño del vector : " + tamano);
 
-            if (lista.get(cont + 1).compareTo(actual) == 0) {
+            // comparacion del valor a evaluar con los que se encuentran dentro del vector,
+            //si lo encuentra debe eliminarlo para evitar leerlo nuevamente
+            if (lista.get(cont).compareTo(actual) == 0) {
                 aux1++;
-                System.out.println(" valores comparados-> " + actual + " eliminado->" + lista.get(cont + 1));
-                lista.remove(cont + 1);
-            }
-            cont++;
+                //System.out.println(" valores comparados-> " + actual + " eliminado->" + lista.get(cont)); 
+                find = true;
+                lista.remove(cont);
+                //printArray();
+                n_cambios++;
 
-        } else {
+            } else {
+                cont++;
+            }
+
+        } else { // al llegar al final del vector evaluar el valor temporal mas repetido
             if (aux1 > aux2) {
                 aux2 = aux1;
-                aux1 = 0;
                 maximo = actual;
-                System.out.println("Valor maximo temporal: " + maximo);
-            }            
+                System.out.println("Valor maximo temporal: " + maximo + " # de veces encontrado:" + (aux2));
+            }
             cont = 0;
-            posicion++;
+            aux1 = 0;
+            change = true;
         }
 
-       
-        if (posicion < tamano - 1) {
-            recorrer();
-        } else {
-            System.out.println("Valor maximo final: " + maximo);
+        // si elimina debe correr una posicion
+        if (find == true && cont != 0) {
+            cont--;
         }
+
+        // realizar el proceso hasta que se evalue el ultimo valor del vector
+        if (posicion < tamano) {
+            recorrer();
+            n_recorridos++;
+        }
+    }
+
+    public static void printArray() {
+        int a = 0;
+        String mensaje = "[";
+        while (a < lista.size()) {
+            mensaje = mensaje + lista.get(a) + ",";
+            a++;
+        }
+        mensaje = mensaje + "]";
+        System.out.println(mensaje);
     }
 
 }
