@@ -1,12 +1,7 @@
-package programacionv;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author
- */
-public class Programacion_C2 {
+public class Recorrer {
 
     static ArrayList<Integer> lista = new ArrayList<Integer>();
     static int cont = 0; // contador del valor del vector
@@ -70,13 +65,12 @@ public class Programacion_C2 {
         find = false;
 
         if (cont < tamano) {
-
             // validar el valor a evaluar dentro del vector
             if (cont == 0 && change == true) {
                 actual = lista.get(cont);
                 change = false;
+                posicion++;
             }
-
 //            System.out.println("Valor a evaluar " + actual + " contador:" + cont + " Valor a comparar = " + lista.get(cont)
 //                    + " Tamaño del vector : " + tamano);
 
@@ -92,6 +86,7 @@ public class Programacion_C2 {
 
             } else {
                 cont++;
+                //posicion = cont;
             }
 
         } else { // al llegar al final del vector evaluar el valor temporal mas repetido
@@ -100,6 +95,7 @@ public class Programacion_C2 {
                 maximo = actual;
                 System.out.println("Valor maximo temporal: " + maximo + " # de veces encontrado:" + (aux2));
             }
+            //posicion = cont;
             cont = 0;
             aux1 = 0;
             change = true;
@@ -108,6 +104,7 @@ public class Programacion_C2 {
         // si elimina debe correr una posicion
         if (find == true && cont != 0) {
             cont--;
+            //posicion = cont;
         }
 
         // realizar el proceso hasta que se evalue el ultimo valor del vector
@@ -129,3 +126,4 @@ public class Programacion_C2 {
     }
 
 }
+
